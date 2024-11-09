@@ -12,57 +12,6 @@
 
 #include "ft_printf.h"
 
-int	ft_putchar_re(char n)
-{
-	return (write(1, &n, 1));
-}
-
-int	ft_putstr(char *str)
-{
-	int	turn;
-
-	// int	check;
-	turn = 0;
-	if (str == NULL)
-		return (write(1, "(null)", 6));
-	while (*str)
-	{
-		turn = ft_putchar_re(*str++);
-		// if (check == -1)
-		// 	return (-1);
-		// turn += check;
-	}
-	return (turn);
-}
-
-int	ft_putnbr(int i)
-{
-	int	check;
-	int	turn;
-
-	turn = 0;
-	if (i < 0)
-	{
-		check = ft_putchar_re('-');
-		if (check == -1)
-			return (-1);
-		turn += check;
-		i = -i;
-	}
-	if (i >= 10)
-	{
-		check = ft_putnbr(i / 10);
-		if (check == -1)
-			return (-1);
-		turn += check;
-	}
-	check = ft_putchar_re((i % 10) + '0');
-	if (check == -1)
-		return (-1);
-	turn += check;
-	return (turn);
-}
-
 static int	implement_keys(va_list args, char format)
 {
 	int	turn;
@@ -100,16 +49,15 @@ int	ft_printf(const char *format, ...)
 		if (*format == '%')
 		{
 			format++;
+			if (*format == '\0')
+				break ;
 			check = implement_keys(args, *format);
-			if (check == -1)
-				return (va_end(args), (-1));
 			turn += check;
 		}
 		else
 		{
 			check = ft_putchar_re(*format);
-			if (check == -1)
-				return (va_end(args), -1);
+			turn += check;
 		}
 		format++;
 	}

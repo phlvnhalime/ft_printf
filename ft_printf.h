@@ -13,9 +13,9 @@
 #ifndef FT_PRINTF_H
 # define FT_PRINTF_H
 
-# include <unistd.h>
-# include <stdlib.h>
 # include <stdarg.h>
+# include <stdlib.h>
+# include <unistd.h>
 
 int	ft_unsigned_des(unsigned int i);
 int	ft_puthex(unsigned long i, char format);
@@ -23,5 +23,6 @@ int	ft_putptr(void *ptr);
 int	ft_putchar_re(char n);
 int	ft_putstr(char *str);
 int	ft_putnbr(int i);
+int	ft_printf(const char *format, ...);
 
 #endif

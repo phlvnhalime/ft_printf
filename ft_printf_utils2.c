@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_printf_utils2.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hpehliva <hpehliva@student.42heilbronn.de  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/11/09 09:51:14 by hpehliva          #+#    #+#             */
+/*   Updated: 2024/11/09 09:51:17 by hpehliva         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_printf.h"
 
 int	ft_putchar_re(char n)
@@ -23,20 +35,21 @@ int	ft_putstr(char *str)
 	return (turn);
 }
 
-int	ft_putnbr(unsigned int i)
+int	ft_putnbr(int i)
 {
 	int	check;
 	int	turn;
 
 	turn = 0;
-	// if (i < 0)
-	// {
-	// 	check = ft_putchar_re('-');
-	// 	if (check == -1)
-	// 		return (-1);
-	// 	turn += check;
-	// 	i = -i;
-	// }
+	if (i == -2147483648)
+		return (ft_putstr("-2147483648"));
+	if (i < 0)
+	{
+		turn += ft_putchar_re('-');
+		if (turn == -1)
+			return (-1);
+		i = -i;
+	}
 	if (i >= 10)
 	{
 		check = ft_putnbr(i / 10);

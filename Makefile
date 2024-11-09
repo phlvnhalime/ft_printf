@@ -18,25 +18,29 @@ CFLAGS = -Wall -Werror -Wextra
 
 AR = ar rcs
 
-RM = rm -r
+RM = rm -rf
 
 OBJDIR = Objects
 
-SRCS = ft_printf_utils.c ft_printf_utils2.c ft_printf.c
+SRCS = 	ft_printf.c \
+		ft_printf_utils.c \
+		ft_printf_utils2.c 
 
-OBJS = ${SRCS:.c=${OBJDIR}.o}
+OBJS = ${SRCS:.c=.o}
+
+OBJSPATH = $(addprefix $(OBJDIR)/, $(OBJS))
 
 all: ${NAME}
 
-${NAME}: ${OBJS}
-	${AR} ${NAME} ${OBJS}
+${NAME}: ${OBJSPATH}
+	${AR} ${NAME} ${OBJSPATH}
 
 ${OBJDIR}/%.o: %.c
-	mkdir ${OBJDIR}
+	@mkdir -p ${OBJDIR}
 	${CC} ${CFLAGS} -o $@ -c $<
+
 clean:  
-	${RM} ${OBJS}
-	${RM} -r ${OBJDIR}
+	${RM} ${OBJDIR}
 
 fclean: clean
 	${RM} ${NAME}

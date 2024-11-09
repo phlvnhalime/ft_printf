@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_printf_utils.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hpehliva <hpehliva@student.42heilbronn.de  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/11/09 09:50:52 by hpehliva          #+#    #+#             */
+/*   Updated: 2024/11/09 09:50:59 by hpehliva         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_printf.h"
 
 int	ft_unsigned_des(unsigned int i)
@@ -33,9 +45,12 @@ int	ft_puthex(unsigned long i, char format)
 	if (i >= 16)
 	{
 		turn += ft_puthex((i / 16), format);
+		if (turn == -1)
+			return (-1);
 	}
-	turn += ft_putchar_re(base[i % 16]);
-	return (turn);
+	if (ft_putchar_re(base[i % 16]) == -1)
+		return (-1);
+	return (turn + 1);
 }
 
 int	ft_putptr(void *ptr)
